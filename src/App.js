@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Route, Routes } from 'react-router-dom'
+import CustomersComp from './components/customers/Customers'
+import EditCustomerComp from './components/customers/EditCustomer'
+import HomepageComp from './components/Homepage'
+import ResponsiveAppBar from './components/Menu'
+import EditProductComp from './components/products/EditProduct'
+import ProductCustomersListComp from './components/products/ProductCustomersList'
+import ProductsComp from './components/products/Products'
+import PurchasedComp from './components/purchases/Purchased'
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <ResponsiveAppBar />
+
+      <Routes>
+        <Route path='/' element={<HomepageComp />} />
+
+        <Route path='/products' element={<ProductsComp />} >
+          <Route path=':id/customers' element={<ProductCustomersListComp />} />
+        </Route>
+        <Route path='/edit_product/:id' element={<EditProductComp />} />
+
+        <Route path='/customers' element={<CustomersComp />} />
+        <Route path='/edit_customer/:id' element={<EditCustomerComp />} />
+
+        <Route path='/purchased' element={<PurchasedComp />} />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
